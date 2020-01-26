@@ -35,8 +35,9 @@ export default class App extends React.Component {
   };
 
   reset = () => {
+    const newArr = this.generateSquence();
     this.setState(() => {
-      return { currentIndex: 0 };
+      return { currentIndex: 0, listNumber: newArr };
     });
   };
 
@@ -46,16 +47,33 @@ export default class App extends React.Component {
       <div className="App">
         <h1>Hello CodeSandbox</h1>
         <h2>Start editing to see some magic happen!</h2>
-        <div class="section" style={{ fontSize: "50px" }}>
-          <div>Number:</div>
-          <span>{listNumber[currentIndex]}</span>
+        <div id="body">
+          <div class="section" style={{ fontSize: "50px" }}>
+            <div>Number:</div>
+            <span>{listNumber[currentIndex]}</span>
+          </div>
+          <div onClick={this.increaseIndex} class="section">
+            <span class="myButton">Next Number</span>
+          </div>
+          <div onClick={this.reset} class="section">
+            <span class="red-button">RESET</span>
+          </div>
         </div>
-        <div onClick={this.increaseIndex} class="myButton section">
-          Next Number
-        </div>
-        <div onClick={this.increaseIndex} class="red-button section">
-          RESET
-        </div>
+
+        <p id="debug">
+          <div style={{ wordWrap: "break-word" }}>
+            {this.state.listNumber.map((value, index, arr) => {
+              if (arr[currentIndex] === value) {
+                return (
+                  <span style={{ backgroundColor: "green", color: "white" }}>
+                    {value},
+                  </span>
+                );
+              }
+              return `${value},`;
+            })}
+          </div>
+        </p>
       </div>
     );
   }
