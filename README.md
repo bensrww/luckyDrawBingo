@@ -1,2 +1,0 @@
-# luckyDrawBingo
-Created with CodeSandbox
